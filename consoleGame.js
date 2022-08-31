@@ -51,6 +51,7 @@ function playerSelection(){
     }
 }
 function singleRoundGame(computer,player){
+    console.log("");
     console.log(`Player chose ${player}. Computer chose ${computer}.`)
     if(player === "Rock"){
        
@@ -88,7 +89,7 @@ function singleRoundGame(computer,player){
         } 
         else{
             console.log("ERROR -> Something went wrong in singleRoundGame game logic");
-        } 
+        }
         //paper beats rock
         //paper looses to scissors
         //draw
