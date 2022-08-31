@@ -18,20 +18,49 @@ function computerSelection(){
 function playerSelection(){
     let userText = prompt(`Type "Rock", "Paper" or "Scissors"!`);
     let playerChoice = userText.toLowerCase();
-
-    console.log(playerChoice);
-
-    if (playerChoice == "rock") {
+    //114, 111, 99, 107 -> rock // 
+    if (playerChoice === "rock") {
         return "Rock";
     }
-    else if(playerChoice == "paper"){
+    else if(playerChoice === "paper"){
         return "Paper";
     }
-    else if(playerChoice == "scissors"){
+    else if(playerChoice === "scissors"){
         return "Scissors";
     }
     else{
-        console.log("You may have mistyped your selection. Try again");
+        console.log("You may have mistyped your selection. Try again!");
         return(playerSelection());
     }
 }
+function singleRoundGame(computer,player){
+    if(player === "Rock"){
+       
+        //rock beast scissors
+
+        //rock looses to paper
+
+        //draw
+    }
+    else if(player === "Paper"){
+        //paper beast rock
+
+        //paper looses to scissors
+
+        //draw
+    }
+    else if(player === "Scissors"){
+        //paper beats rock
+
+        //paper looses to scissors
+
+        //draw
+    }
+    else{
+        console.log("ERROR -> Something went wrong in game logic");
+    }
+
+}
+
+let computer = computerSelection();
+let player = playerSelection();
