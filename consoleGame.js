@@ -1,15 +1,14 @@
 function computerSelection(){
     //Even Distribution of rng values.
-    let random = Math.floor(Math.random() * (3 - 1 +1)) + 1;
-
-    if (random == 1) {
-        return "Rock";
+    let random = Math.floor(Math.random() * (3 - 1 +1));
+    if (random == 0) {
+        return random;
+    }
+    else if (random == 1) {
+        return random;
     }
     else if (random == 2) {
-        return "Paper"
-    }
-    else if (random == 3) {
-        return "Scissors";
+        return random;
     }
     else {
         console.log("ERROR -> Computer play function broken");
@@ -38,34 +37,40 @@ function playerSelection(){
     
     //Return Logic
     if (playerChoice === "rock") {
-        return "Rock";
+        return 0;
     }
     else if(playerChoice === "paper"){
-        return "Paper";
+        return 1;
     }
     else if(playerChoice === "scissors"){
-        return "Scissors";
+        return 2;
     }
     else{
         console.log("ERROR -> Something went wrong in playerSelection function return logic")
     }
 }
 function singleRoundGame(computer,player){
+    let playerValue;
+    let computerValue;
+    //Quick logic to find out each selections choice and convert to string for console log
+    if(player === 0 || computer === 0) if(player === 0){playerValue = "Rock"} if(computer === 0){computerValue = "Rock"}
+    if(player === 1 || computer === 1) if(player === 1){playerValue = "Paper"} if(computer === 1){computerValue = "Paper"}
+    if(player === 2 || computer === 2) if(player === 2){playerValue = "Scissors"} if(computer === 2){computerValue = "Scissors"}
+    //Quick Console spacing
     console.log("");
-    console.log(`Player chose ${player}. Computer chose ${computer}.`)
-    if(player === "Rock"){
-       
-        if (computer === "Scissors"){
+    console.log(`Player chose ${playerValue}. Computer chose ${computerValue}.`)
+    if(player === 0){      
+        if (computer === 2){
             console.log("You win! Rock beats Scissors");
-            return("Win");
+            return 3;
         } 
-        else if (computer === "Paper"){
+        else if (computer === 1){
             console.log("You loose! Rock looses to Paper");
-            return("Loose");
+            return 4;
         } 
-        else if (computer === "Rock"){
+        else if (computer === 0){
             console.log("Draw! You both picked Rock");
-            return("Draw");
+            return 5;
         } 
         else{
             console.log("ERROR -> Something went wrong in singleRoundGame game logic");
@@ -74,18 +79,18 @@ function singleRoundGame(computer,player){
         //rock looses to paper
         //draw
     }
-    else if(player === "Paper"){
-        if (computer === "Rock"){
+    else if(player === 1){
+        if (computer === 0){
             console.log("You win! Paper beats Rock");
-            return("Win");
+            return 3;
         } 
-        else if (computer === "Scissors"){
+        else if (computer === 2){
             console.log("You loose! Paper looses to Scissors");
-            return("Loose");
+            return 4;
         } 
-        else if (computer === "Paper"){
+        else if (computer === 1){
             console.log("Draw! You both picked Paper");
-            return("Draw");
+            return 5;
         } 
         else{
             console.log("ERROR -> Something went wrong in singleRoundGame game logic");
@@ -94,18 +99,18 @@ function singleRoundGame(computer,player){
         //paper looses to scissors
         //draw
     }
-    else if(player === "Scissors"){
-        if (computer === "Paper"){
+    else if(player === 2){
+        if (computer === 1){
             console.log("You win! Scissors beats Paper");
-            return("Win");
+            return 3;
         } 
-        else if (computer === "Rock"){
+        else if (computer === 0){
             console.log("You loose! Scissors looses to Rock");
-            return("Loose");
+            return 4;
         } 
-        else if (computer === "Scissors"){
+        else if (computer === 2){
             console.log("Draw! You both picked Scissors");
-            return("Draw");
+            return 5;
         } 
         else{
             console.log("ERROR -> Something went wrong in singleRoundGame game logic");
@@ -119,8 +124,7 @@ function singleRoundGame(computer,player){
     }
 }
 
-function game(){
-    
+function game(){   
     //Scores Object
     let scores ={
         player: 0,
@@ -132,13 +136,13 @@ function game(){
     for (let i = 0; i < 5; i++) {
         let round = singleRoundGame(computerSelection(), playerSelection());
         
-        if(round === "Win"){
+        if(round === 3){
             scores.player++;
         }
-        else if(round === "Loose"){
+        else if(round === 4){
             scores.computer++;
         }
-        else if(round === "Draw"){  
+        else if(round === 5){  
             scores.draws++;
         }
     }
@@ -147,14 +151,17 @@ function game(){
     console.log("");
     console.log("######TOTAL SCORES######");
     if (scores.player === scores.computer) {
+        //Draw
         console.log(`Draw! Both the player and the computer had ${scores.player} wins`);
         console.log(`You drew ${scores.draws} times!`);
     }
     else if (scores.player > scores.computer) {
+        //Win
         console.log(`You Win! You beat the computer with ${scores.player} wins, where the computer had ${scores.computer} wins`);
         console.log(`You drew ${scores.draws} times!`);
     }
     else if (scores.player < scores.computer) {
+        //Loose
         console.log(`You Loose! The computer beat you with ${scores.computer} wins, where you had had ${scores.player} wins`);
         console.log(`You drew ${scores.draws} times!`);
     }
@@ -162,5 +169,6 @@ function game(){
         console.log("ERROR -> Something went wrong in displaying the winner and the scores.")
     }
 }
-
+// 0, 1, 2 are rock, paper, scissors.
+// 3, 4, 5 are win, loose, draw.
 game();
